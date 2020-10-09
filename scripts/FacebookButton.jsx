@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Socket } from './Socket';
+import FacebookLogin from 'react-facebook-login';
 
-function handleSubmit(event) {
+function handleSubmit(response) {
     // TODO replace with name from oauth
+    console.log(response);
     let name = "John Doe";
     Socket.emit('new facebook user', {
         'name': name,
@@ -13,6 +15,10 @@ function handleSubmit(event) {
 
 export function FacebookButton() {
     return (
-            <button onClick={handleSubmit}>Log in with Facebook!</button>
+      <FacebookLogin
+        appId="341378700407972"
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={handleSubmit} />
     );
 }
